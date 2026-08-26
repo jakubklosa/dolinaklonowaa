@@ -1,0 +1,6 @@
+{
+  "name": "Dolina Klonowa",
+  "description": "Luksusowy ośrodek wypoczynkowy: eleganckie pokoje, strefa spa, masaże i wellness oraz aktywności na świeżym powietrzu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

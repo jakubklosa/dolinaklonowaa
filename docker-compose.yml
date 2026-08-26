@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  dolina-klonowa-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dolina-klonowa:latest
+    container_name: dolina_klonowa_app
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
