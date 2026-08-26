@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Sparkles } from 'lucide-react'
+import logoImg from '../assets/images/golden_maple_logo_1787784263957.jpg'
 
 const links = [
   { to: '/', label: 'Strona główna' },
@@ -14,7 +14,12 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <NavLink to="/" className="logo">
-          <Sparkles className="logo-icon" size={20} />
+          <img
+            src={logoImg}
+            alt="Logo Dolina Klonowa"
+            className="logo-image"
+            referrerPolicy="no-referrer"
+          />
           <span>Dolina Klonowa</span>
         </NavLink>
         <nav className="main-nav">

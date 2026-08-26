@@ -1,13 +1,66 @@
 import { FormEvent, useState } from 'react'
-import { Phone, Mail, MapPin, Send, Sparkles, CheckCircle } from 'lucide-react'
+import { Phone, Mail, MapPin, Send, Sparkles, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
 import CtaSection from '../components/CtaSection'
 
 export default function Contact() {
-  const [status, setStatus] = useState<'idle' | 'sent'>('idle')
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    message: '',
+  })
+  const [status, setStatus] = useState<'idle' | 'loading' | 'sent' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setStatus('sent')
+    setStatus('loading')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/biuro@dolinaklonowa.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          'Imię': formData.firstName,
+          'Nazwisko': formData.lastName,
+          'Adres e-mail': formData.email,
+          'Telefon': formData.phone || 'Nie podano',
+          'Wiadomość': formData.message,
+          _subject: `Nowa wiadomość ze strony Dolina Klonowa od: ${formData.firstName} ${formData.lastName}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success !== 'false') {
+        setStatus('sent')
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          message: '',
+        })
+      } else {
+        setStatus('error')
+        setErrorMessage(data.message || 'Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.')
+      }
+    } catch {
+      setStatus('error')
+      setErrorMessage('Nie udało się połączyć z serwerem pocztowym. Prosimy o kontakt bezpośredni pod numerem telefonu lub mailem.')
+    }
   }
 
   return (
@@ -68,7 +121,7 @@ export default function Contact() {
             <span className="eyebrow">Formularz kontaktowy</span>
             <h2>Skorzystaj z formularza, aby się z nami skontaktować</h2>
             <p style={{ fontSize: '1.02rem', lineHeight: '1.6' }}>
-              Wypełnij formularz, a nasz zespół odpowie na Twoje zapytanie najszybciej jak to możliwe i pomoże dobrać idealny pakiet wypoczynkowy.
+              Wypełnij formularz, a Twoja wiadomość trafi bezpośrednio do naszej skrzynki <strong>biuro@dolinaklonowa.com</strong>. Nasz zespół odpowie na Twoje zapytanie najszybciej jak to możliwe.
             </p>
             <div style={{ marginTop: '2rem' }}>
               <span className="eyebrow">Bądź z nami na bieżąco</span>
@@ -89,29 +142,88 @@ export default function Contact() {
             <div className="form-row">
               <label>
                 Imię *
-                <input type="text" name="firstName" placeholder="np. Jan" required />
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="np. Jan"
+                  required
+                />
               </label>
               <label>
                 Nazwisko *
-                <input type="text" name="lastName" placeholder="np. Kowalski" required />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="np. Kowalski"
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-row">
+              <label>
+                Adres e-mail *
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="jan.kowalski@example.com"
+                  required
+                />
+              </label>
+              <label>
+                Numer telefonu
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="np. 600 000 000"
+                />
               </label>
             </div>
             <label>
-              Adres e-mail *
-              <input type="email" name="email" placeholder="jan.kowalski@example.com" required />
-            </label>
-            <label>
               Wiadomość *
-              <textarea name="message" rows={5} placeholder="Wpisz treść swojej wiadomości..." required />
+              <textarea
+                name="message"
+                rows={5}
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Wpisz treść swojej wiadomości, zapytanie o termin lub pakiet SPA..."
+                required
+              />
             </label>
-            <button type="submit" className="btn btn-primary">
-              <Send size={16} />
-              <span>Wyślij wiadomość</span>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={status === 'loading'}
+            >
+              {status === 'loading' ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />
+                  <span>Wysyłanie...</span>
+                </>
+              ) : (
+                <>
+                  <Send size={16} />
+                  <span>Wyślij wiadomość</span>
+                </>
+              )}
             </button>
             {status === 'sent' && (
               <div className="form-success" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <CheckCircle size={18} />
-                <span>Dziękujemy! Twoja wiadomość została pomyślnie wysłana.</span>
+                <span>Dziękujemy! Twoja wiadomość została wysłana na biuro@dolinaklonowa.com. Odpowiemy wkrótce!</span>
+              </div>
+            )}
+            {status === 'error' && (
+              <div className="form-error" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <AlertCircle size={18} />
+                <span>{errorMessage}</span>
               </div>
             )}
           </form>

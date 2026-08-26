@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin, Sparkles } from 'lucide-react'
+import logoImg from '../assets/images/golden_maple_logo_1787784263957.jpg'
 
 export default function Footer() {
   return (
@@ -7,7 +8,15 @@ export default function Footer() {
       <div className="container">
         <div className="footer-top-grid">
           <div>
-            <div className="footer-brand-title">Dolina Klonowa</div>
+            <div className="footer-brand-title" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+              <img
+                src={logoImg}
+                alt="Logo Dolina Klonowa"
+                style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }}
+                referrerPolicy="no-referrer"
+              />
+              <span>Dolina Klonowa</span>
+            </div>
             <p className="footer-desc">
               Kameralne miejsce wypoczynku i relaksu w otoczeniu natury. Luksusowe apartamenty, strefa spa oraz niezapomniane chwile w Chwalibożycach.
             </p>
