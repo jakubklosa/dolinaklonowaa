@@ -92,8 +92,8 @@ export default function Home() {
             </div>
             <div className="about-image-wrap">
               <img 
-                src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1000&q=85" 
-                alt="Ekskluzywne wnętrza i apartamenty w Dolinie Klonowej" 
+                src="/poznaj-nas.jpg" 
+                alt="Strefa sauny i relaksu w Dolinie Klonowej" 
                 className="section-image"
                 referrerPolicy="no-referrer"
               />
