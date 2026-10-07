@@ -9,7 +9,7 @@ const services = [
     icon: BedDouble,
     title: 'Ekskluzywne pokoje i apartamenty',
     text: 'Oferujemy luksusowe, przestronne pokoje z eleganckim wystrojem z naturalnego drewna i kamienia, które zapewnią Ci pełen komfort podczas pobytu w Dolinie Klonowej.',
-    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+    image: '/about.jpg',
     alt: 'Przytulny apartament w Dolinie Klonowej',
   },
   {
@@ -18,8 +18,8 @@ const services = [
     icon: Sparkle,
     title: 'Strefa SPA & Wellness',
     text: 'Nasza strefa spa zachęca do głębokiego relaksu. Skorzystaj z sauny fińskiej, łaźni parowej i zewnętrznej balii z gorącą wodą pod gwiazdami.',
-    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
-    alt: 'Strefa relaksu i basen wellness',
+    image: '/poznaj-nas.jpg',
+    alt: 'Strefa relaksu i sauna w Dolinie Klonowej',
   },
   {
     number: '03',
@@ -36,7 +36,7 @@ const services = [
     icon: Bike,
     title: 'Aktywności na świeżym powietrzu',
     text: 'Zrelaksuj się w otoczeniu natury, korzystając z naszych aktywności: wypożyczalni rowerów, tras nordic walking, leśnych ścieżek oraz strefy ogniskowej.',
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80',
+    image: '/hero.jpg',
     alt: 'Wyprawy leśne i kontakt z naturą',
   },
 ]

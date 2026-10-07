@@ -88,7 +88,7 @@ export default function About() {
         <div className="container history-grid">
           <div className="history-image-wrap">
             <img 
-              src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80" 
+              src="/hero.jpg" 
               alt="Malownicza przyroda i lasy Doliny Klonowej" 
               className="section-image"
               referrerPolicy="no-referrer"

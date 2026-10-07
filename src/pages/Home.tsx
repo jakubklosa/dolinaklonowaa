@@ -106,14 +106,14 @@ export default function Home() {
         <div className="container services-preview-grid">
           <div className="services-preview-images">
             <img 
-              src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=80" 
-              alt="Strefa relaksu i wellness" 
+              src="/about.jpg" 
+              alt="Strefa relaksu i basen w Dolinie Klonowej" 
               className="preview-img-top"
               referrerPolicy="no-referrer"
             />
             <img 
-              src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=900&q=80" 
-              alt="Ekskluzywne apartamenty i tarasy" 
+              src="/poznaj-nas.jpg" 
+              alt="Sauna i relaks w Dolinie Klonowej" 
               className="preview-img-bottom"
               referrerPolicy="no-referrer"
             />
