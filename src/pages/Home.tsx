@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Fullscreen with Spa Background */}
-      <section className="hero-fullscreen">
+      <section className="hero-fullscreen" style={{ backgroundImage: "url('/hero.jpg')" }}>
         <div className="hero-overlay"></div>
         <div className="container">
           <div className="hero-content">
