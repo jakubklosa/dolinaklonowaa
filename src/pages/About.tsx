@@ -44,10 +44,9 @@ export default function About() {
             </div>
             <div className="about-image-wrap">
               <img 
-                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" 
+                src="/about.jpg" 
                 alt="Wypoczynek i komfort w Dolinie Klonowej" 
                 className="section-image"
-                referrerPolicy="no-referrer"
               />
             </div>
           </div>
